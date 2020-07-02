@@ -11,4 +11,5 @@ ir.nn2 <- nnet(species ~ ., data = ird, subset = samp, size = 2, rang = 0.1,
                decay = 5e-4, maxit = 200)
 
 pmmlmodel <- pmml(ir.nn2)
-saveXML(pmmlmodel,file = "IrisNet.xml")
+saveXML(pmmlmodel,file = "IrisNet.xml", model.name = "IrisNet_Model", namespace = "4_3")
+
