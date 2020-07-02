@@ -12,11 +12,3 @@ ir.nn2 <- nnet(species ~ ., data = ird, subset = samp, size = 2, rang = 0.1,
 
 pmmlmodel <- pmml(ir.nn2)
 saveXML(pmmlmodel,file = "IrisNet.xml")
-
-pmmlmodel <- pmml(myModel, model.name = "Churn_Logistic_Regression_Model", 
-                  app.name = "Churn_LogReg", 
-                  description = "Modelo de Regresion para Demo", 
-                  copyright = NULL, transforms = NULL, unknownValue = NULL, 
-                  weights = NULL)
-
-saveXML(pmmlmodel,file = "IrisNet.xml")
