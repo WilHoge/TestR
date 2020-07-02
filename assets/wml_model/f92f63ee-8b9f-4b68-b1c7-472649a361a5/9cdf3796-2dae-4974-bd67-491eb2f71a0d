@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<PMML version="4.3" xmlns="http://www.dmg.org/PMML-4_3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dmg.org/PMML-4_4 http://www.dmg.org/pmml/v4-4/pmml-4-4.xsd">
+ <Header copyright="Copyright (c) 2020 wsuser" description="Neural Network Model">
+  <Extension name="user" value="wsuser" extender="SoftwareAG PMML Generator"/>
+  <Application name="SoftwareAG PMML Generator" version="2.3.1"/>
+  <Timestamp>2020-07-02 13:56:54</Timestamp>
+ </Header>
+ <DataDictionary numberOfFields="5">
+  <DataField name="species" optype="categorical" dataType="string">
+   <Value value="c"/>
+   <Value value="s"/>
+   <Value value="v"/>
+  </DataField>
+  <DataField name="Sepal.L." optype="continuous" dataType="double"/>
+  <DataField name="Sepal.W." optype="continuous" dataType="double"/>
+  <DataField name="Petal.L." optype="continuous" dataType="double"/>
+  <DataField name="Petal.W." optype="continuous" dataType="double"/>
+ </DataDictionary>
+ <NeuralNetwork modelName="NeuralNet_model" functionName="classification" numberOfLayers="2" activationFunction="logistic">
+  <MiningSchema>
+   <MiningField name="species" usageType="predicted" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="Sepal.L." usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="Sepal.W." usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="Petal.L." usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="Petal.W." usageType="active" invalidValueTreatment="returnInvalid"/>
+  </MiningSchema>
+  <Output>
+   <OutputField name="Predicted_species" optype="categorical" dataType="string" feature="predictedValue"/>
+   <OutputField name="Probability_c" optype="continuous" dataType="double" feature="probability" value="c"/>
+   <OutputField name="Probability_s" optype="continuous" dataType="double" feature="probability" value="s"/>
+   <OutputField name="Probability_v" optype="continuous" dataType="double" feature="probability" value="v"/>
+  </Output>
+  <NeuralInputs numberOfInputs="4">
+   <NeuralInput id="1">
+    <DerivedField name="derivedNI_Sepal.L." optype="continuous" dataType="double">
+     <FieldRef field="Sepal.L."/>
+    </DerivedField>
+   </NeuralInput>
+   <NeuralInput id="2">
+    <DerivedField name="derivedNI_Sepal.W." optype="continuous" dataType="double">
+     <FieldRef field="Sepal.W."/>
+    </DerivedField>
+   </NeuralInput>
+   <NeuralInput id="3">
+    <DerivedField name="derivedNI_Petal.L." optype="continuous" dataType="double">
+     <FieldRef field="Petal.L."/>
+    </DerivedField>
+   </NeuralInput>
+   <NeuralInput id="4">
+    <DerivedField name="derivedNI_Petal.W." optype="continuous" dataType="double">
+     <FieldRef field="Petal.W."/>
+    </DerivedField>
+   </NeuralInput>
+  </NeuralInputs>
+  <NeuralLayer numberOfNeurons="2">
+   <Neuron id="5" bias="-9.40294062094799">
+    <Con from="1" weight="-4.6831774453775"/>
+    <Con from="2" weight="-6.65062202296059"/>
+    <Con from="3" weight="8.47862872947199"/>
+    <Con from="4" weight="9.38507634636959"/>
+   </Neuron>
+   <Neuron id="6" bias="0.395484133059368">
+    <Con from="1" weight="0.332660650741921"/>
+    <Con from="2" weight="2.80610605766864"/>
+    <Con from="3" weight="-3.59666753968385"/>
+    <Con from="4" weight="-1.60692559132648"/>
+   </Neuron>
+  </NeuralLayer>
+  <NeuralLayer numberOfNeurons="3" activationFunction="identity" normalizationMethod="softmax">
+   <Neuron id="7" bias="6.43615862589907">
+    <Con from="5" weight="-9.72957770248387"/>
+    <Con from="6" weight="-7.24236371630298"/>
+   </Neuron>
+   <Neuron id="8" bias="-1.69289977377805">
+    <Con from="5" weight="-4.37285562953662"/>
+    <Con from="6" weight="8.80038258655928"/>
+   </Neuron>
+   <Neuron id="9" bias="-4.74322939122656">
+    <Con from="5" weight="14.1023905312864"/>
+    <Con from="6" weight="-1.55789441724782"/>
+   </Neuron>
+  </NeuralLayer>
+  <NeuralOutputs numberOfOutputs="3">
+   <NeuralOutput outputNeuron="7">
+    <DerivedField name="derivedNO_species" optype="continuous" dataType="double">
+     <NormDiscrete field="species" value="c"/>
+    </DerivedField>
+   </NeuralOutput>
+   <NeuralOutput outputNeuron="8">
+    <DerivedField name="derivedNO_species" optype="continuous" dataType="double">
+     <NormDiscrete field="species" value="s"/>
+    </DerivedField>
+   </NeuralOutput>
+   <NeuralOutput outputNeuron="9">
+    <DerivedField name="derivedNO_species" optype="continuous" dataType="double">
+     <NormDiscrete field="species" value="v"/>
+    </DerivedField>
+   </NeuralOutput>
+  </NeuralOutputs>
+ </NeuralNetwork>
+</PMML>
